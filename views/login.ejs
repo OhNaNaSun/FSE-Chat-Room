@@ -1,16 +1,16 @@
-<link rel="stylesheet" type="text/css" href="./stylesheets/style.css" />
-
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 <script src="./javascripts/login.js" defer></script>
 <div class="container flex">
 	<div class="login-box flex">
 		<div>
 			<label for="username">Username</label><br />
-			<input type="text" name="username" />
+			<input type="text" name="username" id="username" />
 		</div>
 		<div>
 			<label for="password">Password</label><br />
-			<input type="text" name="password" />
+			<input name="password" type="password" id="password" />
 		</div>
+		<div id="message"></div>
 		<div>
 			<button id="login-button">Login</button>
 			<button id="register-button">Register</button>
