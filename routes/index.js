@@ -4,17 +4,24 @@ const bcrypt = require('bcrypt')
 var router = express.Router()
 const Model = require('../db/models/model')
 const initializePassport = require('../passport-config')
-initializePassport(passport, async (username) => {
-	const data = await Model.findOne({ username })
-	return data
-})
-router.get('/login', function (req, res, next) {
+initializePassport(
+	passport,
+	async (username) => {
+		const data = await Model.findOne({ username })
+		return data
+	},
+	async (id) => {
+		const data = await Model.findOne({ id })
+		return data
+	}
+)
+router.get('/login', checkNotAuthenticated, function (req, res, next) {
 	res.render('login', { title: 'Chat Room Login Page' })
 })
-router.get('/', function (req, res, next) {
-	res.render('chatRoom.ejs', { title: 'Chat Room Page' })
+router.get('/', checkAuthenticated, function (req, res, next) {
+	res.render('index.ejs', { username: req.user.username })
 })
-router.post('/register', async (req, res) => {
+router.post('/register', checkNotAuthenticated, async (req, res) => {
 	const hashedPassword = await bcrypt.hash(req.body.password, 10)
 	const data = new Model({
 		username: req.body.username,
@@ -27,7 +34,7 @@ router.post('/register', async (req, res) => {
 		res.status(400).json({ message: error.message })
 	}
 })
-router.post('/login', function (req, res, next) {
+router.post('/login', checkNotAuthenticated, function (req, res, next) {
 	passport.authenticate('local', function (err, user, info) {
 		if (err) {
 			return next(err)
@@ -35,8 +42,30 @@ router.post('/login', function (req, res, next) {
 		if (!user) {
 			return res.status(200).json(info)
 		}
-		return res.status(200).json({ username: user })
+		req.login(user, function (err) {
+			if (err) return next(err)
+			return res.status(200).json(user)
+		})
 	})(req, res, next)
 })
-
+router.delete('/logout', (req, res) => {
+	req.logOut(function (err) {
+		if (err) {
+			return next(err)
+		}
+	})
+	return res.status(200).json({ success: true })
+})
+function checkAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return next()
+	}
+	res.redirect('/login')
+}
+function checkNotAuthenticated(req, res, next) {
+	if (req.isAuthenticated()) {
+		return res.redirect('/')
+	}
+	return next()
+}
 module.exports = router
