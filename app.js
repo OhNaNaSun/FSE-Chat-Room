@@ -7,7 +7,7 @@ const flash = require('express-flash')
 const session = require('express-session')
 const passport = require('passport')
 var routes = require('./routes/index')
-const Model = require('./db/models/model')
+
 //db
 const mongoose = require('mongoose')
 require('dotenv').config()
