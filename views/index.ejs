@@ -3,9 +3,13 @@
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
 <h2>FSE Chat Room</h2>
-hi <%=username%>
+hi <span id="username"><%=username%></span>
 <button id="logout-button">Logout</button>
-<div id="message-container"></div>
+<div id="message-container">
+    <% for(var i=0; i<messages.length; i++) { %>
+        <div class="message-box"><div class="chat-person-box"><b><%=messages[i].username%></b><%=messages[i].sentTime%></div><div><%=messages[i].message%></div></div>
+    <% } %>
+</div>
 <textarea name="" id="chat-input" cols="30" rows="10"></textarea>
 <br />
 <button id="post-button">Post</button>

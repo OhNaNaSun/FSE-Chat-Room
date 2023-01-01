@@ -15,12 +15,18 @@ socket.on('chat-message', (data) => {
 document.getElementById('post-button').addEventListener('click', () => {
 	const chatInput = document.getElementById('chat-input')
 	const newMessage = chatInput.value
-	socket.emit('send-chat-message', newMessage)
-	appendMessage(newMessage)
+	const username = document.getElementById('username').innerText
+	const newMessageData = {
+		username,
+		message: newMessage,
+		sentTime: new Date().toLocaleString(),
+	}
+	socket.emit('send-chat-message', newMessageData)
+	appendMessage(newMessageData)
 	chatInput.value = ''
 })
-function appendMessage(newMessage) {
-	const messageBoxHtml = `<div class="chat-person-box"><b>nana</b></div><div>${newMessage}</div>`
+function appendMessage({ username, message, sentTime }) {
+	const messageBoxHtml = `<div class="chat-person-box"><b>${username}</b>${sentTime}</div><div>${message}</div>`
 	const wrapperDiv = document.createElement('div')
 	wrapperDiv.className = 'message-box'
 	wrapperDiv.innerHTML = messageBoxHtml
