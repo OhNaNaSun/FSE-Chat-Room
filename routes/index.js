@@ -21,7 +21,16 @@ router.get('/login', checkNotAuthenticated, function (req, res, next) {
 })
 router.get('/', checkAuthenticated, async function (req, res) {
 	const data = await ChatMessageModel.find()
-	res.render('index.ejs', { username: req.user.username, messages: data })
+
+	res.render('index.ejs', {
+		username: req.user.username,
+		messages: data.map((item) => {
+			if (item.username === req.user.username) {
+				item.username = 'Me'
+			}
+			return item
+		}),
+	})
 })
 router.post('/register', checkNotAuthenticated, async (req, res) => {
 	const hashedPassword = await bcrypt.hash(req.body.password, 10)

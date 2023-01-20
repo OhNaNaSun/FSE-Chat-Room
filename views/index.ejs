@@ -2,12 +2,18 @@
 <script src="./javascripts/index.js" defer></script>
 
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
-<h2>FSE Chat Room<button id="logout-button">Logout</button></h2>
-<div id="message-container">
+<div class="chat-container">
+<p class="chat-header"><span>FSE Chat Room</span><button id="logout-button">Logout</button></p>
+<span id="username" class="hidden"><%=username%></span>
+<div id="message-container" class="message-container">
     <% for(var i=0; i<messages.length; i++) { %>
-        <div class="message-box"><div class="chat-person-box"><b><%=messages[i].username%></b><%=messages[i].sentTime%></div><div><%=messages[i].message%></div></div>
+        <div class="message-box">
+            <div class="chat-person-box"><b><%=messages[i].username%></b><span><%=messages[i].sentTime%></span></div>
+            <div class="sent-message-box"><span><%=messages[i].message%></span></div>
+        </div>
     <% } %>
 </div>
 <textarea name="" id="chat-input" cols="30" rows="10"></textarea>
 <br />
-<button id="post-button">Post</button>
+<p class="footer"><button id="post-button">Post</button></p>
+</div>

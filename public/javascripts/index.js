@@ -9,7 +9,6 @@ document.getElementById('logout-button').addEventListener('click', async () => {
 })
 const socket = io('/')
 socket.on('chat-message', (data) => {
-	console.log(data)
 	appendMessage(data)
 })
 document.getElementById('post-button').addEventListener('click', () => {
@@ -26,9 +25,16 @@ document.getElementById('post-button').addEventListener('click', () => {
 	chatInput.value = ''
 })
 function appendMessage({ username, message, sentTime }) {
-	const messageBoxHtml = `<div class="chat-person-box"><b>${username}</b>${sentTime}</div><div>${message}</div>`
+	if (username === document.getElementById('username').innerText) {
+		username = 'Me'
+	}
+	const messageBoxHtml = `<div class="chat-person-box"><b>${username}</b><span>${sentTime}<span></div><div class='sent-message-box'><span>${message}</span></div>`
 	const wrapperDiv = document.createElement('div')
 	wrapperDiv.className = 'message-box'
 	wrapperDiv.innerHTML = messageBoxHtml
 	document.getElementById('message-container').append(wrapperDiv)
+	const objDiv = document.getElementById('message-container')
+	objDiv.scrollTop = objDiv.scrollHeight
 }
+const objDiv = document.getElementById('message-container')
+objDiv.scrollTop = objDiv.scrollHeight

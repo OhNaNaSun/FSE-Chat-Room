@@ -1,28 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 3rem "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  width: 100%;
 }
-.flex{
+.login-box {
+  margin: 30% auto 0 auto;
+  max-width: 900px;
+  padding: 24px;
   display: flex;
-  justify-content: center;
-}
-.container{
-  /* display: flex; */
-  /* gap: 10px 20px; */
-  /* justify-content: center; */
-}
-.login-box{
-  gap: 10px 20px;
   flex-direction: column;
-} 
+  align-items: center;
+}
+.title{
+  font-size: 1.5em;
+  text-align: center;
+}
+.login-form{
+  width: 100%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+.form-control{
+  width: 100%;
+  position: relative;
+  margin: 20px 0
+}
+label{
+  margin-bottom: 5px;
+    display: inline-block;
+}
+input, button{
+  font-size: 1.1em
+}
+input{
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  border: 2px black solid
+}
+.login-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.login-buttons button{
+  border-radius: 5px;
+  padding: 14px;
+  width: 49%;
+  font-weight: bold;
+  border: 2px solid black;
+  background-color: #9fc3fa;
+}
+/* index page */
+.chat-container{
+  margin: 0 auto 0 auto;
+  height: 100%;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-header{
+ background-color: #9fc3fa;
+ padding: 20px;
+ display: flex;
+ justify-content: space-between;
+}
+.chat-header span{
+  border: 2px;
+  padding: 14px;
+}
+.chat-header button {
+  background-color: #f9b16e;
+  border: 2px solid black;;
+  border-radius: 5px;
+  padding: 1% 3%;
+  font-weight: bold;
+}
 a {
   color: #00B7FF;
 }
-.message-box{
-  background: #716d6d1a;
-  padding: 7px;
-  margin: 7px 0;
+.message-container{
+  margin-top: 4%;
+  height: 55%;
+  overflow: scroll;
 }
-.chat-person{
-
+.message-box{
+  background: #eeeeee;
+  padding: 3%;
+  margin: 2% 0;
+}
+.chat-person-box{
+  display: flex;
+  justify-content: space-between;
+}
+.message-box span{
+  font-size: 0.7em;
+  text-align: right;
+  color: #3e3e3e;
+}
+.sent-message-box{
+  margin-top: 4%;
+}
+.sent-message-box span{
+  font-size: 0.7em;
+  color: #3e3e3e; 
+}
+.hidden{
+  display: none
+}
+textarea{
+  width: 100%;
+  height: 30%;
+  border: 2px solid black;
+  font: inherit;
+}
+.footer{
+  background-color: #9fc3fa;
+  padding: 2%;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 5%;
+}
+.footer button{
+  background-color: #f9b16e;
+    border: 2px solid black;;
+    border-radius: 5px;
+  padding: 1% 3%;
+    margin: 0 auto;
+    font-weight: bold;
 }
