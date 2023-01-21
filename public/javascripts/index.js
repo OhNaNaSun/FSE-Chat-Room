@@ -15,10 +15,17 @@ document.getElementById('post-button').addEventListener('click', () => {
 	const chatInput = document.getElementById('chat-input')
 	const newMessage = chatInput.value
 	const username = document.getElementById('username').innerText
+	const time = new Date()
 	const newMessageData = {
 		username,
 		message: newMessage,
-		sentTime: new Date().toLocaleString(),
+		sentTime: `${time
+			.toLocaleDateString()
+			.replaceAll('/', '.')} ${time.toLocaleString('en-US', {
+			hour: 'numeric',
+			minute: 'numeric',
+			hour12: true,
+		})}`,
 	}
 	socket.emit('send-chat-message', newMessageData)
 	appendMessage(newMessageData)
