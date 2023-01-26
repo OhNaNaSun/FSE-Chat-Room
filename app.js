@@ -8,7 +8,7 @@ const session = require('express-session')
 const passport = require('passport')
 var routes = require('./routes/index')
 
-//db
+// db
 const mongoose = require('mongoose')
 require('dotenv').config()
 const mongoString = process.env.DATABASE_URL
