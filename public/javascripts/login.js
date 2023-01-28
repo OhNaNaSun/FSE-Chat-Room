@@ -16,7 +16,9 @@ document
 			password: document.getElementById('password').value,
 		}
 		const res = await sendData('/register', postData)
-		document.getElementById('message').innerHTML = res.message
+		if (res.message) {
+			document.getElementById('message').innerHTML = res.message
+		}
 	})
 document.getElementById('login-button').addEventListener('click', async () => {
 	const postData = {
@@ -24,7 +26,9 @@ document.getElementById('login-button').addEventListener('click', async () => {
 		password: document.getElementById('password').value,
 	}
 	const res = await sendData('/login', postData)
-	document.getElementById('message').innerHTML = res.message
+	if (res.message) {
+		document.getElementById('message').innerHTML = res.message
+	}
 	if (res.username) {
 		window.location.href = '/'
 	}
