@@ -1,12 +1,3 @@
-document.getElementById('logout-button').addEventListener('click', async () => {
-	const response = await fetch('./logout', {
-		method: 'DELETE',
-	})
-	const data = await response.json()
-	if (data.success) {
-		window.location.href = '/login'
-	}
-})
 const socket = io('/')
 socket.on('chat-message', (data) => {
 	appendMessage(data)
@@ -30,6 +21,15 @@ document.getElementById('post-button').addEventListener('click', () => {
 	socket.emit('send-chat-message', newMessageData)
 	appendMessage(newMessageData)
 	chatInput.value = ''
+})
+document.getElementById('logout-button').addEventListener('click', async () => {
+	const response = await fetch('./logout', {
+		method: 'DELETE',
+	})
+	const data = await response.json()
+	if (data.success) {
+		window.location.href = '/login'
+	}
 })
 function appendMessage({ username, message, sentTime }) {
 	if (username === document.getElementById('username').innerText) {

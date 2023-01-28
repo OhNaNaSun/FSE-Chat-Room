@@ -1,8 +1,8 @@
-var express = require('express')
+const express = require('express')
 const passport = require('passport')
 const bcrypt = require('bcrypt')
-var router = express.Router()
-const Model = require('../db/models/model')
+const router = express.Router()
+const Model = require('../db/models/usersModel')
 const ChatMessageModel = require('../db/models/chatMessageModel')
 const initializePassport = require('../passport-config')
 initializePassport(
@@ -67,6 +67,7 @@ router.delete('/logout', (req, res) => {
 	})
 	return res.status(200).json({ success: true })
 })
+// middleware functions
 function checkAuthenticated(req, res, next) {
 	if (req.isAuthenticated()) {
 		return next()
